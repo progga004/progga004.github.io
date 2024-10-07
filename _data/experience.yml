@@ -1,0 +1,68 @@
+work_experience:
+- company: "Evolv Technology"
+  start_date: "2024-06-03"
+  duration: "Jun 2024 - Aug 2024"
+  position: "Computer Vision Engineer Intern"
+  technologies:
+  - "Python"
+  - "OpenCV"
+  - "TensorFlow"
+  - "Numpy"
+  - "Pandas"
+  - "Git/GitHub"
+  - "Bitbucket"
+  - "Linux"
+  - "Profiling Tools (cProfile)"
+  - "Kalman Filter"
+  - "Custom Tracker Development"
+  - "Object Detection"
+- company: "Computer Science Department (Stony Brook University)"
+
+  start_date: "2024-01-19" # Adjust the start date to match your timeline
+  duration: "Jan 2024 - Present"
+  position: "Independent Researcher"
+  
+  technologies:
+  - "Computer Vision"
+  - "Machine Learning"
+  - "Eye Gaze Estimation"
+  - "Python"
+  - "Data Analysis"
+  - "Model Training and Evaluation"
+  
+- company: "Computer Vision Lab (Stony Brook University)"
+  start_date: "2023-05-15"
+  duration: "May 2023 - Present"
+  position: "Undergraduate Research Assistant"
+  technologies:
+  - "Python"
+  - "VGG Image Annotator"
+  - "Detectron"
+  - "Multi-Camera Setup"
+  - "Machine Learning"
+  
+
+  
+
+research_experience:
+- company: "Undergraduate Admissions Office (Stony Brook University)"
+  start_date: "2023-05-28"
+  duration: "May 2023 - Present"
+  position: "Undergraduate Tour Guide"
+  technologies:
+  - "Public Speaking"
+  - "Communication"
+  - "Customer Service"
+  - "Leadership"
+  - "Time Management"
+  - "Knowledge of University Resources"
+- company: "Computer Science Department (Stony Brook University)"
+  start_date: "2023-08-26"
+  duration: "Aug 2023 - Dec 2023"
+  position: "Undergraduate Teaching Assistant"
+  technologies:
+  - "Mentoring"
+  - "Leadership"
+  - "Classroom Management"
+  - "Problem Solving"
+  - "Communication"

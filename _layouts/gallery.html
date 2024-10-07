@@ -1,14 +1,476 @@
 ---
 layout: default
 ---
+<style>
+        .container {
+    /* padding-top: 50px; */
+    margin-top: 5px;
+    margin-bottom: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+.experience-card {
+    background-color: #282828;
+    padding: 50px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.timeline {
+    position: relative;
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-container {
+    padding: 20px;
+    position: relative;
+    width: 50%;
+}
+
+.timeline-container.left {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-container.right {
+    left: 50%;
+    text-align: left;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: white;
+    transform: translateX(-50%);
+}
+
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.red-box, .white-box {
+    margin: 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.red-box {
+    background-color: red;
+    color: white;
+    margin-right: 3px;
+    margin-left: 5px;
+}
+
+.white-box {
+    background-color: white;
+    color: #000;
+    margin-left: 5px;
+}
+
+.timeline-container.left .experience-header {
+    justify-content: flex-end; /* Align to the right */
+}
+
+.timeline-container.right .experience-header {
+    justify-content: flex-start; /* Align to the left */
+}
+
+.experience-body {
+    font-size: 1.1rem;
+    padding: 20px; /* Padding inside the box */
+    border: 2px solid white; /* White border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Slight shadow */
+}
+
+.position {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.technologies {
+    margin-top: 5px;
+}
+
+.tech {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 2px solid white;
+    color: white;
+    background-color: transparent;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.experience-buttons {
+    margin-bottom: 20px;
+}
+
+.btn-toggle {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-toggle.active {
+    background-color: #ff6b6b;
+}
+
+.btn-toggle:hover {
+    background-color: #777;
+}
+
+.experience-content {
+    display: none;
+}
+
+.experience-content.active {
+    display: block;
+}
+
+.experience-card {
+    background-color: #282828;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 50px;
+    margin-right: 50px;
+    animation: fadeIn 2s ease-in-out;
+    
+}
+
+.experience-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-container {
+    padding: 20px;
+    position: relative;
+    width: 50%;
+    /* opacity: 0;
+    transform: translateX(-50px); */
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+
+.timeline-container.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: white;
+    transform: translateX(-50%);
+    animation: drawLine 2s ease-out;
+}
+
+@keyframes drawLine {
+    from {
+        height: 0;
+    }
+    to {
+        height: 100%;
+    }
+}
+
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.timeline-container.left::after {
+    left: 100%;
+    transform: translateX(30%); /* Optional: to center the dot on the line */
+}
+
+.timeline-container.right::after {
+    left: 0%;
+    transform: translateX(-100%); /* Optional: to center the dot on the line */
+}
+/* .resume-download {
+    margin-top: 20px;
+} */
+.resume-download {
+    position: relative; /* Ensures it's positioned correctly */
+    z-index: 10; /* Higher value to bring it to the front */
+    margin-bottom: 20px;
+}
+
+.resume-link {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.resume-link:hover {
+    color: #ff3333;
+}
+.experience-wrapper-card {
+    padding: 40px; /* Padding inside the card */
+    margin: 40px auto; /* Add top margin to create space from the top, and center horizontally */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    max-width: 1200px; /* Max width to keep the layout tidy */
+   
+    
+}
+
+/* Optional: Add hover effect for better interactivity */
+.experience-wrapper-card:hover {
+    transform: scale(1.02); /* Slight zoom on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+h1.card-title {
+  
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+
+
+.card {
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  padding: 20px 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 2s ease-in-out;
+  
+}
+
+@keyframes popDot {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+</style>
+<div class="col-lg-12">
+<div class="card">
+    <h1 class="card-title">Experience</h1>
+    <!-- Add this block right after the experience sections -->
+<!-- Add this block right after your experience sections -->
+<div class="resume-download text-center">
+    <p>
+        For more information, download my resume:
+        <a href="/assets/files/resume.pdf" download class="resume-link" style="color: #ff6b6b; text-decoration: none; font-weight: bold;">
+            Download Resume
+        </a>
+    </p>
 </div>
-<div class="container">
-        <div class="row d-flex justify-content-center">
-                <div class="col-10 m10">
-                        <div class="card">
-                                <h1 class="card-title"> Gallery </h1>
-                                {{content}}
-                        </div>
-                </div>
+
+
+    <div class="experience-card">
+        <div class="experience-buttons text-center">
+            <button id="showAll" class="btn btn-toggle active">All</button>
+            <button id="showWork" class="btn btn-toggle">Work & Research Experience</button>
+            <button id="showResearch" class="btn btn-toggle">Leadership Experience</button>
         </div>
+
+        <!-- All Experiences -->
+        <div id="allExperience" class="experience-content active">
+                <div class="timeline">
+                    {% assign all_experiences = site.data.experience.work_experience | concat: site.data.experience.research_experience %}
+                    {% assign sorted_experiences = all_experiences | sort: 'start_date' | reverse %}
+            
+                    {% for experience in sorted_experiences %}
+                        {% assign index_mod = forloop.index0 | modulo:2 %}
+                        <div class="timeline-container {% cycle 'left', 'right' %}">
+                            <div class="experience-header">
+                                {% if index_mod == 0 %}
+                                    <!-- For even index, left side -->
+                                    <span class="white-box">{{ experience.duration }}</span>
+                                    <span class="red-box">{{ experience.company }}</span>
+                                {% else %}
+                                    <!-- For odd index, right side -->
+                                    <span class="red-box">{{ experience.company }}</span>
+                                    <span class="white-box">{{ experience.duration }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="experience-body">
+                                <div class="position">{{ experience.position }}</div>
+                                <div class="technologies">
+                                    {% for tech in experience.technologies %}
+                                        <span class="tech hollow-box">{{ tech }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="timeline-line"></div>
+                </div>
+            </div>
+            
+        <!-- Work Experience -->
+        <div id="workExperience" class="experience-content" style="display: none;">
+                <div class="timeline">
+                    {% assign work_experiences = site.data.experience.work_experience %}
+                    {% for experience in work_experiences %}
+                        {% assign index_mod = forloop.index0 | modulo:2 %}
+                        <div class="timeline-container {% cycle 'left', 'right' %}">
+                            <div class="experience-header">
+                                {% if index_mod == 0 %}
+                                    <!-- For even index, left side -->
+                                    <span class="white-box">{{ experience.duration }}</span>
+                                    <span class="red-box">{{ experience.company }}</span>
+                                {% else %}
+                                    <!-- For odd index, right side -->
+                                    <span class="red-box">{{ experience.company }}</span>
+                                    <span class="white-box">{{ experience.duration }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="experience-body">
+                                <div class="position">{{ experience.position }}</div>
+                                <div class="technologies">
+                                    {% for tech in experience.technologies %}
+                                        <span class="tech hollow-box">{{ tech }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="timeline-line"></div>
+                </div>
+            </div>
+          
+            
+
+        <!-- Research Experience -->
+        <div id="researchExperience" class="experience-content" style="display: none;">
+                <div class="timeline">
+                    {% assign research_experiences = site.data.experience.research_experience %}
+                    {% for experience in research_experiences %}
+                        {% assign index_mod = forloop.index0 | modulo:2 %}
+                        <div class="timeline-container {% cycle 'left', 'right' %}">
+                            <div class="experience-header">
+                                {% if index_mod == 0 %}
+                                    <!-- For even index, left side -->
+                                    <span class="white-box">{{ experience.duration }}</span>
+                                    <span class="red-box">{{ experience.company }}</span>
+                                {% else %}
+                                    <!-- For odd index, right side -->
+                                    <span class="red-box">{{ experience.company }}</span>
+                                    <span class="white-box">{{ experience.duration }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="experience-body">
+                                <div class="position">{{ experience.position }}</div>
+                                <div class="technologies">
+                                    {% for tech in experience.technologies %}
+                                        <span class="tech hollow-box">{{ tech }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="timeline-line"></div>
+                </div>
+            </div>
+            
+    </div>
 </div>
+</div>
+</div>
+</div>
+<script>
+        document.getElementById('showAll').addEventListener('click', function() {
+    document.getElementById('allExperience').style.display = 'block';
+    document.getElementById('workExperience').style.display = 'none';
+    document.getElementById('researchExperience').style.display = 'none';
+    this.classList.add('active');
+    document.getElementById('showWork').classList.remove('active');
+    document.getElementById('showResearch').classList.remove('active');
+});
+
+document.getElementById('showWork').addEventListener('click', function() {
+    document.getElementById('allExperience').style.display = 'none';
+    document.getElementById('workExperience').style.display = 'block';
+    document.getElementById('researchExperience').style.display = 'none';
+    this.classList.add('active');
+    document.getElementById('showAll').classList.remove('active');
+    document.getElementById('showResearch').classList.remove('active');
+});
+
+document.getElementById('showResearch').addEventListener('click', function() {
+    document.getElementById('allExperience').style.display = 'none';
+    document.getElementById('workExperience').style.display = 'none';
+    document.getElementById('researchExperience').style.display = 'block';
+    this.classList.add('active');
+    document.getElementById('showAll').classList.remove('active');
+    document.getElementById('showWork').classList.remove('active');
+});
+// Smooth Scroll
+document.querySelectorAll('.btn-toggle').forEach(button => {
+    button.addEventListener('click', function() {
+        const target = document.getElementById(this.dataset.target);
+        window.scrollTo({
+            top: target.offsetTop,
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Reveal Cards on Scroll
+function revealOnScroll() {
+    const elements = document.querySelectorAll('.timeline-container');
+    const windowHeight = window.innerHeight;
+
+    elements.forEach(el => {
+        const positionFromTop = el.getBoundingClientRect().top;
+
+        if (positionFromTop - windowHeight <= 0) {
+            el.classList.add('visible');
+        }
+    });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll(); // Trigger on load
+
+
+
+
+</script>

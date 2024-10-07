@@ -1,65 +1,412 @@
 ---
 layout: default
 ---
+<style>
+.projects-card {
+  margin-top: 20px;
+}
+
+.project-title {
+  font-size: 3rem;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.welcome-message {
+  font-size: 1.5rem;
+}
+
+.project-cards .project-card {
+  background-color: black !important ;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.project-cards .project-card h4 {
+  font-size: 1.30rem;
+  color: white !important;
+
+}
+
+.btn-read {
+  background-color: #ff6b6b !important;
+  border: 2px solid #ff6b6b;
+  color: white !important;
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border-radius: 5px; 
+  text-transform: uppercase; 
+  font-weight: bold; 
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add a transition for hover effect */
+}
+
+.btn-read:hover {
+  background-color: white;
+  color: red;
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.pagination-buttons {
+  margin-top: 20px;
+}
+
+.pagination-buttons .btn {
+  font-size: 1.25rem;
+  background-color: red;
+  color: white;
+}
+
+.pagination-buttons .btn:hover {
+  background-color: white;
+  color: red;
+}
+
+.modal-content {
+  background-color: white;
+  color: black;
+}
+
+.modal-body .project-description {
+  font-style: italic;
+}
+
+.project-title-bold {
+  font-weight: bold;
+  color: #e63946 !important; /* Adjust the color as needed */
+  font-size: 1.5rem; /* Adjust font size */
+}
+
+.tech-boxes {
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  gap: 10px; /* Add spacing between technology badges */
+}
+
+.tech-badge {
+  color: white; /* Text color */
+  background-color: #ff6b6b; /* Transparent background */
+  border: 2px solid #ff6b6b; /* Red border */
+  padding: 5px 10px; /* Adjust padding */
+  font-weight: bold;
+  font-size:1.1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add shadow for hollow effect */
+}
+
+.tech-badge:hover {
+  background-color: red !important;
+  color: white;
+}
+
+.modal-footer .btn {
+  background-color: red;
+  color: white;
+}
+
+.modal-footer .btn:hover {
+  background-color: white;
+  color: red;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animated-intro-card {
+  margin-bottom: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.project-card {
+  background-color: black !important;
+  color: white;
+  margin-bottom: 20px;
+  height: 400px; /* Set a fixed height for all cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures content stays well-distributed */
+}
+
+.project-card img {
+  height: 200px; /* Set a fixed height for the image */
+  object-fit: cover; /* Ensures the image fits the allocated space without distortion */
+}
+
+.project-card .card-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.project-card h4 {
+  font-size: 1.30rem;
+  color: white !important;
+  margin-bottom: 10px;
+}
+
+.project-card p {
+  overflow: hidden; /* Ensures long text doesn't overflow */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limits text to 3 lines */
+  -webkit-box-orient: vertical;
+}
+
+.project-card .btn-read {
+  margin-top: auto; /* Ensures the button stays at the bottom */
+}
+
+.btn-read {
+  background-color: #ff6b6b !important;
+  border: 2px solid #ff6b6b;
+  color: white !important;
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border-radius: 5px; 
+  text-transform: uppercase; 
+  font-weight: bold; 
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-read:hover {
+  background-color: white;
+  color: red;
+  cursor: pointer;
+}
+.tech-boxes {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping to a new line */
+  justify-content: flex-start; /* Align items to the left */
+  gap: 10px; /* Add spacing between technology badges */
+  max-width: 100%; /* Ensures the content stays within the card */
+}
+
+.tech-boxes .tech-badge {
+  color: white;
+  background-color: #ff6b6b;
+  border: 2px solid #ff6b6b;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  flex-basis: calc(20% - 10px); /* Ensures 5 badges per line */
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .tech-boxes .tech-badge {
+    flex-basis: calc(33.33% - 10px); /* Show 3 badges per line on smaller screens */
+  }
+  .projects-card {
+  margin-top: 20px;
+}
+
+.project-title {
+  font-size: 3rem;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.welcome-message {
+  font-size: 1.5rem;
+}
+
+.project-cards .project-card {
+  background-color: black !important;
+  color: white;
+  margin-bottom: 20px;
+  height: 400px; /* Set a fixed height for all cards */
+  width: 300px; /* Set a fixed width for all cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the cards on all screen sizes */
+  gap: 20px; /* Add space between cards */
+}
+
+.project-card img {
+  height: 200px; /* Set a fixed height for the image */
+  width: 100%; /* Ensure image takes up full card width */
+  object-fit: cover; /* Ensures the image fits the allocated space without distortion */
+}
+
+.project-card .card-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.project-card h4 {
+  font-size: 1.30rem;
+  color: white !important;
+  margin-bottom: 10px;
+}
+
+.project-card p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limits text to 3 lines */
+  -webkit-box-orient: vertical;
+}
+
+.project-card .btn-read {
+  margin-top: auto; /* Ensures the button stays at the bottom */
+}
+
+.btn-read {
+  background-color: #ff6b6b !important;
+  border: 2px solid #ff6b6b;
+  color: white !important;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-read:hover {
+  background-color: white;
+  color: red;
+  cursor: pointer;
+}
+
+.tech-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
+  max-width: 100%; /* Ensures the content stays within the card */
+}
+
+.tech-badge {
+  color: white;
+  background-color: #ff6b6b;
+  border: 2px solid #ff6b6b;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  flex-basis: calc(20% - 10px); /* Ensures 5 badges per line */
+  text-align: center;
+}
+
+/* Optional: Remove or reduce responsive behavior */
+@media (max-width: 768px) {
+  .tech-badge {
+    flex-basis: calc(33.33% - 10px); /* Adjust the number of badges per line */
+  }
+}
+
+}
+
+
+</style>
 <div class="col-lg-12">
- <div class="row justify-content-center">
-      <div class="col-lg-8">
-              <ul>
-                  <div class="row">
-                      {% for post in paginator.posts %}
-                      <div class="card blog-post">
-                          <img class="card-img-top" src="{{site.url}}{{site.baseurl}}{{ post.thumbnail }}" alt="{{ post.title }}">
-                          <div class="card-body center">
-                              <!-- <img src="{{site.url}}{{site.baseurl}}/assets/img/{{ site.author_logo }}" class="author-profile-img"> -->
-                              <h4 class="card-title">{{ post.title }}</h4>
-
-                              <h6 class="card-subtitle mb-2 text-muted">{{ post.date | date: "%b %-d, %Y" }}</h6>
-                              <p class="card-text">{{ post.summary }} </p>
-
-                              <a href="{{ post.url | prepend: site.baseurl }}" data-disqus-identifier="{{ post.url }}" class="btn btn-dark btn-lg">Read</a>
-                              <span class="disqus-comment-count" data-disqus-identifier="{{ post.url }}"></span>
-
-                          </div>
-                      </div>
-                      {% endfor %}
-                  </div>
-              </ul>
-
-        <div class="row center">
-          <!-- Pagination links -->
-          {% if paginator.total_pages > 1 %}
-            <ul class="pagination pagination-sm">
-              {% if paginator.previous_page %}
-                <li class="pagination-link"><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a></li>
-              {% else %}
-                <li class="pagination-link disabled"><span aria-hidden="true">&laquo;</span></li>
-              {% endif %}
-
-              <li class="pagination-link" ><a href="/blog">First</a></li>
-
-              {% for page in (1..paginator.total_pages) %}
-                {% if page == paginator.page %}
-             <li class="disabled pagination-link"><span><b>{{ page }}</b></span></li>
-                {% elsif page == 1 %}
-                  <li class="pagination-link"><a href="/blog">{{ page }}</a></li>
-                {% else %}
-                  <li class="pagination-link"><a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
-                {% endif %}
-              {% endfor %}
-
-              <li class="pagination-link"><a href="/blog/page/{{ paginator.total_pages }}/#/">Last</a></li>
-
-              {% if paginator.next_page %}
-                <li class="pagination-link"><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&raquo;</a></li>
-              {% else %}
-                <li class="disabled pagination-link"><span>&raquo;</span></li>
-              {% endif %}
-            </ul>
-          {% endif %}
-      </div>
-
+  <!-- Animated Intro Card -->
+  <div class="animated-intro-card">
+    <div class="card text-center">
+      <div class="card-body">
+        <h1 class="project-title">Projects</h1>
+        <h2 class="welcome-message">Welcome to my projects. Here you’ll find a selection of my work. Explore my projects to learn more about what I do.</h2>
+      
     </div>
-    {%- include blog_sidebar.html -%}
+  
 
- </div>
+  <!-- Project Cards Section -->
+  <div class="row justify-content-center project-cards">
+    {% for project in paginator.posts%}
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card project-card text-white bg-red">
+        <img class="card-img-top" src="{{ project.thumbnail }}" alt="{{ project.title }}">
+        <div class="card-body">
+          <h4 class="card-title">{{ project.title }}</h4>
+          <button class="btn btn-dark btn-lg btn-read" data-toggle="modal" data-target="#projectModal{{ forloop.index }}">Read</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  
+
+  <!-- Pagination Buttons -->
+
+  <div class="row center">
+    {% if paginator.total_pages > 1 %}
+      <ul class="pagination pagination-sm">
+        {% if paginator.previous_page %}
+          <li class="pagination-link"><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a></li>
+        {% else %}
+          <li class="pagination-link disabled"><span aria-hidden="true">&laquo;</span></li>
+        {% endif %}
+
+        <li class="pagination-link" ><a href="/blog">First</a></li>
+
+        {% for page in (1..paginator.total_pages) %}
+          {% if page == paginator.page %}
+       <li class="disabled pagination-link"><span><b>{{ page }}</b></span></li>
+          {% elsif page == 1 %}
+            <li class="pagination-link"><a href="/blog">{{ page }}</a></li>
+          {% else %}
+            <li class="pagination-link"><a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        <li class="pagination-link"><a href="/blog/page/{{ paginator.total_pages }}/#/">Last</a></li>
+
+        {% if paginator.next_page %}
+          <li class="pagination-link"><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled pagination-link"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
 </div>
+  
+  
+  <!-- Modals for Project Details -->
+  {% for project in paginator.posts %}
+<div class="modal fade" id="projectModal{{ forloop.index }}" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel{{ forloop.index }}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title project-title-bold" id="projectModalLabel{{ forloop.index }}">{{ project.title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="project-description"><em>{{ project.description }}</em></p>
+        <div class="tech-boxes">
+          {% for tech in project.technologies %}
+          <span class="badge tech-badge">{{ tech }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <a href="{{ project.github_link }}" class="btn btn-dark bg-red">GitHub</a>
+        
+      </div> -->
+      <div class="modal-footer">
+        {% if project.github_link == "Still to come" %}
+        <span class="text-muted"><strong><em>Work in progress. Stay tuned for updates!</em></strong></span></span></span>
+        {% else %}
+          <a href="{{ project.github_link }}" class="btn btn-dark bg-red">GitHub</a>
+        {% endif %}
+      </div>
+      
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+</div>
+</div>
+
+

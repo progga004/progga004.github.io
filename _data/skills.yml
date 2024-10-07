@@ -1,0 +1,50 @@
+languages:
+  - name: Python
+    weight: 10
+  - name: HTML/CSS
+    weight: 8
+  - name: JavaScript
+    weight: 9
+  - name: Java
+    weight: 7
+  - name: C
+    weight: 6
+  - name: R
+    weight: 7
+  - name: SAS
+    weight: 6
+
+frameworks:
+  - name: React
+    weight: 9
+  - name: Node.js
+    weight: 8
+  - name: TensorFlow
+    weight: 8
+  - name: PyTorch
+    weight: 7
+
+tools:
+  - name: Git
+    weight: 10
+  - name: GitHub
+    weight: 9
+  - name: Google Workspace
+    weight: 8
+  - name: Microsoft Office
+    weight: 7
+  - name: Eclipse
+    weight: 6
+  - name: Visual Studio
+    weight: 7
+  - name: LaTeX
+    weight: 6
+  - name: Linux
+    weight: 8
+  
+
+databases:
+  - name: MongoDB
+    weight: 8
+  - name: SQL
+    weight: 7

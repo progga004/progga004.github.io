@@ -1,44 +1,159 @@
+<style>
+  .styled-about-me {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1.5;
+    animation: fadeInUp 2s ease-in-out;
+  }
+
+  #about-me-content {
+    text-align: justify; /* Justifies the text to align both left and right */
+    margin: 0 20px; /* Optional: Add some margin for spacing */
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hidden-panel {
+    display: none; /* Hide panels initially */
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .interactive-section {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .interactive-section p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .motivation-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+
+  .vision-panel,
+  .motivation-panel,
+  .achievements-panel {
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+</style>
+
 <section id="recent-articles">
   <div id="recent-articles-header">
     <div id="recent-articles-title">
-      <h1 class="card-title">Recent Articles</h1>
-    </div>
-    <div id="recent-articles-show-all">
-      <a class="btn btn-lg btn-dark" href="/blog"> View All </a>
+      <h1 class="card-title">About Me</h1>
     </div>
   </div>
   <br />
+  <div id="about-me-content">
+    <p class="styled-about-me">
+      Hi, I'm <strong>Progga Paromita Dutta</strong> from Bangladesh, currently residing in the USA. I am passionate about technology and data science, and I am excited to explore new opportunities in this dynamic field.
+    </p>
 
-  <ul>
-    {% for post in site.posts limit:5 %}
-    <li class="article-card">
-      <a href="{{post.url}}" class="article-card-link">
-        <div id="article-container">
-          <div id="article-img">
-            {% if post.author %}
-              {% assign author = post.author %}
-              {% if author %}
-               {% assign author_data = site.data.authors[author] %}
-               <img
-                src="{{site.url}}{{site.baseurl}}/assets/img/authors/{{author_data.avatar}}"
-                width="50px"
-                height="50px"
-             />
-              {% endif %}
-            {% endif %}
+    <p class="styled-about-me">
+      I began my undergraduate journey as a transfer student at Stony Brook University in Spring 2022, where I am currently a senior, double majoring in Computer Science and Applied Mathematics and Statistics. I am set to graduate in December 2024. Prior to my studies at Stony Brook, I pursued Mechanical Engineering at the Bangladesh University of Engineering and Technology (BUET), which laid the foundation for my analytical and problem-solving skills.
+    </p>
 
-          </div>
-          <div id="article-link">
-              <p class="recent-article-link">{{post.title}} <span style="color: #ccc; font-size: 15px;"> - <i><time datetime="{{ post.date }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time></i></span></p>
-            </div>
-            <div id="article-alert">
-            {% for cat in post.category limit:1 %}
-             <button class="btn btn-sm btn-dark">{{cat}}</button>
-            {% endfor %}
-            </div>
-        </div>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
+    <p class="styled-about-me">
+      Beyond academics, I am actively involved in campus life as a ballroom dancer and a member of the Stony Brook University Ballroom Team. I have competed in prestigious competitions at Harvard and Tufts. Additionally, I am a proud member of Women in Computer Science (WiCS) and the Stony Brook Computing Society (SBCS), where I engage with a vibrant community of peers who share my enthusiasm for technology and innovation.
+    </p>
+  </div>
+
 </section>
+
+<!-- Buttons to reveal content -->
+<div class="interactive-section">
+  <p>Want to know?</p>
+  <div class="button-container">
+    <button onclick="togglePanel('motivation-panel')">My Motivation</button>
+    <button onclick="togglePanel('vision-panel')">My Vision</button>
+    <button onclick="togglePanel('achievements-panel')">My Achievements</button> <!-- Added button -->
+  </div>
+</div>
+
+<!-- Hidden content panels -->
+<div id="motivation-panel" class="hidden-panel">
+  <h2>My Motivation</h2>
+  <p>
+    My journey began with a degree in Mechanical Engineering, but I found myself drawn to the exciting field of AI and its potential to change the world. I was particularly fascinated by the intersection of AI and the metaverse, and the ways in which virtual reality and AI can combine to create immersive and engaging experiences. Eventually, I changed my major to pursue this field.
+
+    My motivation to pursue this field comes from a deep belief that AI can be used to solve some of the world's most pressing problems, such as climate change, healthcare, and education. By harnessing the power of AI, we can create more efficient, sustainable, and equitable systems that benefit everyone.
+  </p>
+</div>
+
+<div id="vision-panel" class="hidden-panel">
+  <h2>My Vision</h2>
+  <p>
+    Through my coursework, personal projects, and research, I am constantly exploring new ways to develop AI technologies that can enhance my experience in the AI field. I am passionate about building innovative solutions that can make a real difference in people's lives.
+
+    I am also committed to using AI ethically and responsibly. As AI becomes more powerful and ubiquitous, it is essential that we use it to promote human values such as fairness, transparency, and accountability.
+  </p>
+</div>
+
+<div id="achievements-panel" class="hidden-panel">
+  <h2>My Achievements</h2>
+  <ul>
+    <li><b>Dean's List:</b> Recognized for outstanding academic performance each semester at Stony Brook University.</li>
+    <li><b>Young Fellow Scholarship:</b> Awarded at the Design Automation Conference (DAC) 2023 for exceptional contributions to the field of AI and design automation.</li>
+  </ul>
+</div>
+
+<script>
+  function togglePanel(panelId) {
+    const panel = document.getElementById(panelId);
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  }
+</script>

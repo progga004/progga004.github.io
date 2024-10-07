@@ -2,13 +2,28 @@
 layout: full-width
 ---
 
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
 <script>
-  $(document).ready(function() {
-    $("#typewriteText").typewrite({
-      actions: [{ type: "{{site.typewrite-text}}" }]
-    });
+  document.addEventListener('DOMContentLoaded', function() {
+    var options = {
+      strings: [
+        "A passionate\nAI Engineer",
+        "A passionate\nSoftware Engineer",
+        "A passionate\nComputer Vision Engineer"
+      ],
+      typeSpeed: 50,
+      backSpeed: 25,
+      backDelay: 2000,
+      loop: true,
+      showCursor: false
+    };
+
+    var typed = new Typed("#typewriteText", options);
   });
 </script>
+
     <!-- hero section-->
     {%- include hero.html -%}
     <div class="col-lg-8 offset-md-2">
