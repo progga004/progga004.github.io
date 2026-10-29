@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Progga Paromita Dutta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Progga Paromita Dutta, computer vision researcher at Columbia University working on label-efficient vision for medical and industrial imaging.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a fixed identity column on the left (name, links, section index) beside one reading column; stacks to a single column on phones. */
+:root {
+  --paper: #F3F5F7;
+  --surface: #FFFFFF;
+  --ink: #15202A;
+  --muted: #5A6774;
+  --rule: #D6DCE2;
+  --accent: #19807A;
+  --accent-soft: #DCEFEC;
+
+  --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2.125rem;
+  --step-4: clamp(2.25rem, 1.6rem + 2.6vw, 3.25rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0E1419;
+    --surface: #141C23;
+    --ink: #E4EAEE;
+    --muted: #93A1AC;
+    --rule: #25313B;
+    --accent: #4CC2B4;
+    --accent-soft: #15302E;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0E1419;
+  --surface: #141C23;
+  --ink: #E4EAEE;
+  --muted: #93A1AC;
+  --rule: #25313B;
+  --accent: #4CC2B4;
+  --accent-soft: #15302E;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding-block: 48px 64px;
+}
+@media (min-width: 980px) {
+  .shell { grid-template-columns: 280px minmax(0, 1fr); gap: 72px; padding-block: 72px 96px; }
+  .id-col { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 72px); align-self: start; }
+}
+
+/* ---------- identity column ---------- */
+.id-col { display: flex; flex-direction: column; gap: 24px; }
+.name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--step-4);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+.role { margin: 0; color: var(--muted); font-size: 0.9375rem; line-height: 1.5; }
+.role strong { color: var(--ink); font-weight: 600; }
+
+.links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.9375rem; }
+.links a { text-decoration: none; display: inline-flex; gap: 10px; align-items: baseline; }
+.links a:hover span:last-child { text-decoration: underline; }
+.lbl {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  min-width: 64px;
+  display: inline-block;
+}
+.email-row { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; font-size: 0.9375rem; }
+.email { user-select: all; color: var(--ink); }
+.copy {
+  font: 500 0.6875rem/1 var(--font-mono);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  background: none; border: 1px solid var(--rule); color: var(--muted);
+  padding: 5px 8px; border-radius: 3px; cursor: pointer;
+}
+.copy:hover { color: var(--accent); border-color: var(--accent); }
+
+.index { border-top: 1px solid var(--rule); padding-top: 18px; display: none; }
+@media (min-width: 980px) { .index { display: block; } }
+.index ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.index a { color: var(--muted); text-decoration: none; font-size: 0.875rem; }
+.index a:hover, .index a.on { color: var(--ink); }
+.index a.on::before { content: ""; display: inline-block; width: 14px; height: 1px; background: var(--accent); vertical-align: middle; margin-right: 8px; }
+
+/* ---------- main column ---------- */
+main { min-width: 0; display: flex; flex-direction: column; gap: 72px; }
+section { scroll-margin-top: 32px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+/* intro */
+.intro { display: grid; gap: 32px; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 760px) { .intro { grid-template-columns: minmax(0, 1fr) 248px; gap: 40px; } }
+.thesis {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: 1.18;
+  font-weight: 400;
+  margin: 0 0 20px;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+.thesis em { font-style: italic; color: var(--accent); }
+.prose { max-width: 64ch; }
+.prose p { margin: 0 0 14px; }
+.prose p:last-child { margin-bottom: 0; }
+
+.figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.figure canvas {
+  width: 100%; max-width: 100%; aspect-ratio: 1 / 1; height: auto;
+  display: block; background: var(--surface); border: 1px solid var(--rule); cursor: pointer;
+}
+.figure figcaption { font-family: var(--font-mono); font-size: 0.6875rem; line-height: 1.55; color: var(--muted); }
+.figure figcaption b { color: var(--ink); font-weight: 500; }
+
+/* news */
+.news { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.news li {
+  display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 16px;
+  padding: 12px 0; border-top: 1px solid var(--rule);
+}
+.news li:last-child { border-bottom: 1px solid var(--rule); }
+.date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+
+/* research threads */
+.threads { display: flex; flex-direction: column; gap: 40px; }
+.thread { display: grid; grid-template-columns: 1fr; gap: 6px 32px; }
+@media (min-width: 760px) { .thread { grid-template-columns: 180px minmax(0, 1fr); } }
+.thread-meta { font-size: 0.8125rem; color: var(--muted); line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.thread-meta .lab { color: var(--ink); font-weight: 600; }
+.thread-meta .when { font-family: var(--font-mono); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+.thread h3 {
+  font-family: var(--font-display); font-weight: 500; font-size: var(--step-2);
+  line-height: 1.2; margin: 0 0 8px; text-wrap: balance;
+}
+.thread p { margin: 0 0 10px; max-width: 64ch; }
+.status {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.6875rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-soft);
+  padding: 3px 8px; border-radius: 2px; margin-bottom: 10px;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; padding: 0; list-style: none; }
+.tags li {
+  font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muted);
+  border: 1px solid var(--rule); padding: 2px 7px; border-radius: 2px;
+}
+.past { border-top: 1px dashed var(--rule); padding-top: 24px; }
+.past h4 { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; margin: 0 0 12px; }
+.past ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.past li { display: grid; grid-template-columns: 1fr; gap: 2px 32px; }
+@media (min-width: 760px) { .past li { grid-template-columns: 180px minmax(0, 1fr); } }
+.past .lab { font-size: 0.8125rem; font-weight: 600; }
+.past .lab span { display: block; font-weight: 400; color: var(--muted); font-family: var(--font-mono); font-size: 0.75rem; }
+
+/* publications */
+.pub-group { margin-bottom: 32px; }
+.pub-group:last-child { margin-bottom: 0; }
+.pub-group h3 { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; margin: 0 0 12px; }
+.pubs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+.pub { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 16px; }
+.venue {
+  font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 500; line-height: 1.3;
+  color: var(--ink); border-left: 2px solid var(--accent); padding-left: 8px; padding-top: 2px;
+}
+.venue small { display: block; color: var(--muted); font-weight: 400; }
+.pub-title { font-family: var(--font-display); font-size: var(--step-1); line-height: 1.3; font-weight: 500; margin: 0 0 4px; }
+.authors { margin: 0; font-size: 0.9375rem; color: var(--muted); }
+.authors .me { color: var(--ink); font-weight: 600; }
+.where { margin: 2px 0 0; font-size: 0.9375rem; font-style: italic; color: var(--muted); }
+.pub-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.chip {
+  font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.06em;
+  text-decoration: none; color: var(--accent); border: 1px solid var(--accent);
+  padding: 3px 8px; border-radius: 2px;
+}
+.chip:hover { background: var(--accent); color: var(--paper); }
+
+/* experience */
+.roles { display: flex; flex-direction: column; gap: 28px; }
+.job { display: grid; grid-template-columns: 1fr; gap: 4px 32px; }
+@media (min-width: 760px) { .job { grid-template-columns: 180px minmax(0, 1fr); } }
+.job h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--step-1); margin: 0; line-height: 1.3; }
+.job .org { margin: 0 0 8px; color: var(--muted); font-size: 0.9375rem; }
+.job ul { margin: 0; padding-left: 18px; max-width: 64ch; }
+.job li { margin-bottom: 6px; }
+.job li::marker { color: var(--accent); }
+.teaching { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.teaching li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; border-top: 1px solid var(--rule); padding-top: 8px; font-size: 0.9375rem; }
+.teaching li span:last-child { color: var(--muted); font-family: var(--font-mono); font-size: 0.75rem; }
+.subhead { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; margin: 36px 0 12px; }
+
+/* projects */
+.projects { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+@media (min-width: 640px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.project { background: var(--surface); padding: 20px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.project h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--step-1); margin: 0; line-height: 1.25; }
+.project p { margin: 0; font-size: 0.9375rem; color: var(--muted); }
+.project .tags { margin-top: auto; padding-top: 6px; }
+.project .kicker { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* education & honors */
+.two { display: grid; grid-template-columns: 1fr; gap: 32px; }
+@media (min-width: 760px) { .two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; } }
+.edu { display: flex; flex-direction: column; gap: 16px; }
+.edu h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--step-1); margin: 0; }
+.edu p { margin: 0; font-size: 0.9375rem; color: var(--muted); }
+.plain-list { margin: 0; padding-left: 18px; font-size: 0.9375rem; display: flex; flex-direction: column; gap: 6px; }
+.plain-list li::marker { color: var(--accent); }
+
+footer { border-top: 1px solid var(--rule); padding-top: 20px; font-size: 0.8125rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+</style>
+</head>
+<body>
+
+
+<div class="shell">
+
+  <!-- ============ IDENTITY COLUMN ============ -->
+  <aside class="id-col">
+    <h1 class="name">Progga Paromita Dutta</h1>
+    <p class="role"><strong>M.S. Computer Science, Columbia University.</strong> Computer vision researcher working on label-efficient learning for medical, biological and industrial imaging.</p>
+
+    <div class="email-row">
+      <span class="lbl">Email</span>
+      <span class="email" id="email">pd2816@columbia.edu</span>
+      <button class="copy" id="copy-email" type="button">Copy</button>
+    </div>
+
+    <ul class="links">
+      <li><a href="https://github.com/progga004" target="_blank" rel="noopener"><span class="lbl">GitHub</span><span>progga004</span></a></li>
+      <li><a href="https://www.linkedin.com/in/progga-paromita-dutta-161031213" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span><span>Progga Paromita Dutta</span></a></li>
+      <!-- Add when ready:
+      <li><a href="YOUR_SCHOLAR_URL" target="_blank" rel="noopener"><span class="lbl">Scholar</span><span>Google Scholar</span></a></li>
+      <li><a href="cv.pdf" target="_blank" rel="noopener"><span class="lbl">CV</span><span>Download (PDF)</span></a></li>
+      -->
+    </ul>
+
+    <nav class="index" aria-label="Sections">
+      <ol>
+        <li><a href="#about">About</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+      </ol>
+    </nav>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <p class="eyebrow">About</p>
+      <div class="intro">
+        <div>
+          <p class="thesis">Teaching vision models to find <em>where</em> something is wrong when the label only says <em>that</em> it is.</p>
+          <div class="prose">
+            <p>Dense, pixel-level annotation is expensive in the domains I care about most. A retina specialist cannot outline every capillary, and a produce line cannot hand-mask every bruise. My research asks how far we can get with weak supervision, adapted foundation models such as DINOv2 and SAM, and photorealistic synthetic data.</p>
+            <p>I am an M.S. student in Computer Science at Columbia, working in Prof. Shree Nayar's CAVE Lab, Prof. Kaveri Thakoor's AI4VS Lab at Columbia Irving Medical Center, and Prof. Corey Toler-Franklin's GLIM Lab. Before Columbia I studied Computer Science and Applied Mathematics at Stony Brook, where I worked on multi-view gaze estimation with Prof. Dimitris Samaras and Prof. Minh Hoai Nguyen.</p>
+            <p>This fall I am also a Computer Vision &amp; Garment Intelligence Research Intern at Silhouet Technologies.</p>
+          </div>
+        </div>
+        <figure class="figure">
+          <canvas id="fig" width="496" height="496" role="img" aria-label="Illustration: a specimen image overlaid with a patch-level anomaly heatmap that highlights a single defect region."></canvas>
+          <figcaption><b>Supervision in:</b> one bit, "defective".<br><b>Localization out:</b> a 16 × 16 patch anomaly map.<br>Tap to replay.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news">
+      <p class="eyebrow">News</p>
+      <ul class="news">
+        <li><span class="date">Oct 2026</span><span>Joined <strong>Silhouet Technologies</strong> as a Computer Vision &amp; Garment Intelligence Research Intern.</span></li>
+        <li><span class="date">Fall 2026</span><span>Teaching assistant for <strong>Prof. Shree K. Nayar</strong> at Columbia.</span></li>
+        <li><span class="date">Sep 2026</span><span>First-author paper on retinal OCTA phenotyping with LLM reporting for Alzheimer's disease at <strong>IEEE AIbThings 2026</strong>.</span></li>
+        <li><span class="date">2026</span><span>Invited paper on agentic hardware security at <strong>IEEE MDTS 2026</strong>.</span></li>
+        <li><span class="date">May 2026</span><span>Joined Prof. Shree Nayar's <strong>CAVE Lab</strong> at Columbia.</span></li>
+        <li><span class="date">Jan 2026</span><span>Joined the <strong>AI4VS Lab</strong> (Prof. Kaveri Thakoor) and the <strong>GLIM Lab</strong> (Prof. Corey Toler-Franklin).</span></li>
+        <li><span class="date">Oct 2025</span><span><strong>Multi-view Gaze Target Estimation</strong> presented at ICCV 2025.</span></li>
+      </ul>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research">
+      <p class="eyebrow">Research</p>
+      <div class="threads">
+
+        <article class="thread">
+          <div class="thread-meta">
+            <span class="lab">CAVE Lab, Columbia</span>
+            <span>Advisor: Prof. Shree K. Nayar</span>
+            <span class="when">May 2026 – present</span>
+          </div>
+          <div>
+            <span class="status">Ongoing</span>
+            <h3>Weakly supervised defect localization for produce inspection</h3>
+            <p>Finding where fruit is defective when the only label is good or defective. My current focus is a classical computer vision approach that localizes defects from the image signal itself, without relying on learned representations.</p>
+            <p>Earlier in the project I built a self-referential anomaly detector over DINOv2 patch features with SAM-based mask sharpening and benchmarked it against WinCLIP and AnomalyCLIP. To get ground truth that does not exist in the wild, I also built a procedural Blender pipeline that renders photorealistic apples with pixel-accurate defect masks.</p>
+            <ul class="tags"><li>Classical CV</li><li>Anomaly localization</li><li>DINOv2</li><li>SAM</li><li>Blender</li></ul>
+          </div>
+        </article>
+
+        <article class="thread">
+          <div class="thread-meta">
+            <span class="lab">AI4VS Lab, CUIMC</span>
+            <span>Advisor: Prof. Kaveri Thakoor</span>
+            <span class="when">Jan 2026 – present</span>
+          </div>
+          <div>
+            <h3>Retinal and brain imaging for Alzheimer's disease</h3>
+            <p>The retina is an accessible window onto the brain. I work on Alzheimer's disease detection from retinal OCTA that accounts for co-occurring conditions, and on combining retinal (OCT) and brain (MRI) imaging so that each modality can inform the other.</p>
+            <ul class="tags"><li>OCTA</li><li>OCT</li><li>MRI</li><li>Multimodal learning</li></ul>
+          </div>
+        </article>
+
+        <article class="thread">
+          <div class="thread-meta">
+            <span class="lab">Central Michigan University</span>
+            <span>Collaborator: Dr. Md Rafiul Kabir</span>
+            <span class="when">2026</span>
+          </div>
+          <div>
+            <h3>Retinal OCTA phenotyping with LLM reporting</h3>
+            <p>An interpretable pipeline for Alzheimer's-related retinal changes. It segments retinal vessels in OCTA scans, extracts vascular biomarkers such as vessel density and fractal dimension, and pairs them with LLM-generated clinical reports. Published as my first-author paper at IEEE AIbThings 2026.</p>
+            <ul class="tags"><li>OCTA</li><li>Vessel segmentation</li><li>Biomarkers</li><li>LLM reporting</li></ul>
+          </div>
+        </article>
+
+        <article class="thread">
+          <div class="thread-meta">
+            <span class="lab">GLIM Lab, Columbia / Barnard</span>
+            <span>Advisor: Prof. Corey Toler-Franklin</span>
+            <span class="when">Jan 2026 – present</span>
+          </div>
+          <div>
+            <h3>Animal behavior recognition from video</h3>
+            <p>Action recognition and pose estimation for behavioral phenotyping in animal models of Alzheimer's disease and autism. I am co-authoring a survey on adversarial and unsupervised learning for animal behavior classification, where labeled behavior data is scarce and lab conditions vary.</p>
+            <ul class="tags"><li>Action recognition</li><li>Pose estimation</li><li>Adversarial learning</li></ul>
+          </div>
+        </article>
+
+        <div class="past">
+          <h4>Earlier research</h4>
+          <ul>
+            <li>
+              <div class="thread-meta"><span class="lab">MobileX Lab, Columbia</span><span>Advisors: Prof. Xia Zhou, Prof. Salvatore Stolfo</span><span class="when">Sep – Dec 2025</span></div>
+              <div>Near-infrared palm-vein verification with ArcFace and AdaFace embeddings, plus generative models that synthesize identity-preserving palm-vein video when real data is scarce.</div>
+            </li>
+            <li>
+              <div class="thread-meta"><span class="lab">Yin Lab, Stony Brook</span><span>Advisor: Prof. Zhaozheng Yin</span><span class="when">Jan – Dec 2024</span></div>
+              <div>Improved gaze estimation by feeding 468 facial landmarks into a CNN, and prototyped an eye-tracking communication board for people with cerebral palsy.</div>
+            </li>
+            <li>
+              <div class="thread-meta"><span class="lab">Computer Vision Lab, Stony Brook</span><span>Advisors: Prof. Dimitris Samaras, Prof. Minh Hoai Nguyen</span><span class="when">May 2023 – May 2024</span></div>
+              <div>Led data collection, annotation and calibration across six synchronized cameras for multi-view gaze target estimation (ICCV 2025).</div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <p class="eyebrow">Publications</p>
+
+      <div class="pub-group">
+        <h3>Conference papers</h3>
+        <ol class="pubs">
+
+          <li class="pub">
+            <div class="venue">AIbThings<small>2026</small></div>
+            <div>
+              <p class="pub-title">Retinal OCTA Phenotyping with LLM Reporting for Alzheimer's Disease</p>
+              <p class="authors"><span class="me">Progga Paromita Dutta</span>, Jeba Maliha, Md Rafiul Kabir</p>
+              <p class="where">IEEE International Conference on Artificial Intelligence, Blockchain, and Internet of Things, 2026</p>
+              <div class="pub-links">
+                <a class="chip" href="https://arxiv.org/abs/2609.04689" target="_blank" rel="noopener">arXiv</a>
+                <!-- <a class="chip" href="IEEE_XPLORE_URL" target="_blank" rel="noopener">Paper</a> -->
+              </div>
+            </div>
+          </li>
+
+          <li class="pub">
+            <div class="venue">ICCV<small>2025</small></div>
+            <div>
+              <p class="pub-title">Multi-view Gaze Target Estimation</p>
+              <p class="authors">Qiaomu Miao, Vivek Raju Golani, Jingyi Xu, <span class="me">Progga Paromita Dutta</span>, Minh Hoai, Dimitris Samaras</p>
+              <p class="where">IEEE/CVF International Conference on Computer Vision, 2025</p>
+              <div class="pub-links">
+                <a class="chip" href="https://openaccess.thecvf.com/content/ICCV2025/html/Miao_Multi-view_Gaze_Target_Estimation_ICCV_2025_paper.html" target="_blank" rel="noopener">Paper</a>
+                <a class="chip" href="https://arxiv.org/abs/2508.05857" target="_blank" rel="noopener">arXiv</a>
+                <a class="chip" href="https://www3.cs.stonybrook.edu/~cvl/multiview_gte.html" target="_blank" rel="noopener">Project page</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="pub">
+            <div class="venue">MDTS<small>2026</small></div>
+            <div>
+              <p class="pub-title">Agentic Hardware Security: Policy-Governed LLM Agents for Silicon Immunity</p>
+              <p class="authors">Dipal Halder, <span class="me">Progga Paromita Dutta</span>, Sandip Ray</p>
+              <p class="where">IEEE International Conference on Microelectronics, Devices and Test Structures, 2026. Invited paper.</p>
+              <!-- <div class="pub-links"><a class="chip" href="PAPER_URL" target="_blank" rel="noopener">Paper</a></div> -->
+            </div>
+          </li>
+
+        </ol>
+      </div>
+
+      <div class="pub-group">
+        <h3>In preparation</h3>
+        <ol class="pubs">
+          <li class="pub">
+            <div class="venue">Survey<small>2026</small></div>
+            <div>
+              <p class="pub-title">Towards Adversarial Learning for Animal Behavior Classification: A Survey and Discussion</p>
+              <p class="authors">Michael Pérez, <span class="me">Progga Dutta</span>, Felicia Sharon, Corey Toler-Franklin</p>
+              <p class="where">In preparation for Expert Systems with Applications (Elsevier)</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <p class="eyebrow">Experience</p>
+      <div class="roles">
+
+        <article class="job">
+          <div class="thread-meta">
+            <span class="lab">Silhouet Technologies</span>
+            <span class="when">Oct 2026 – present</span>
+          </div>
+          <div>
+            <h3>Computer Vision &amp; Garment Intelligence Research Intern</h3>
+            <p class="org">B2B platform for apparel operations · New York, NY (remote)</p>
+            <ul>
+              <li>Research on garment intelligence for the company's Brand Library and garment-component data model.</li>
+              <li>Assessing fashion datasets and garment-attribute taxonomies, and prototyping image and text extraction for garment attributes and components.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="job">
+          <div class="thread-meta">
+            <span class="lab">Evolv Technology</span>
+            <span class="when">Jun – Aug 2024</span>
+          </div>
+          <div>
+            <h3>Computer Vision Engineer Intern, Advanced Threat Detection</h3>
+            <p class="org">Waltham, MA</p>
+            <ul>
+              <li>Built a custom multi-object tracker for a production weapon detection system, combining Kalman filtering with centroid association to keep identities consistent across 30+ test videos.</li>
+              <li>Profiled and rewrote an image processing pipeline over 3.2M images, cutting runtime from three weeks to 32 minutes and unblocking detector training.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="subhead">Teaching</p>
+      <ul class="teaching">
+        <li><span>TA for Prof. Shree K. Nayar · Columbia Computer Science · 180 students</span><span>Fall 2026</span></li>
+        <li><span>TA · Columbia Climate School · 60 students</span><span>Summer 2026</span></li>
+        <li><span>TA, Machine Learning for Social Science · Columbia QMSS · 75 students</span><span>Spring 2026</span></li>
+        <li><span>TA, Foundations of Computer Science · Stony Brook CS · 120 students</span><span>Fall 2022</span></li>
+        <li><span>TA, Finite Mathematical Structures · Stony Brook AMS · ~180 students</span><span>Fall 2022</span></li>
+      </ul>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <p class="eyebrow">Projects</p>
+      <div class="projects">
+
+        <article class="project">
+          <span class="kicker">Columbia · Fall 2026 · team</span>
+          <h3>LicenseGraph</h3>
+          <p>A Java service that tracks the lineage of AI assets (datasets, models, derived outputs) and enforces their usage policies.</p>
+          <ul class="tags"><li>Java</li><li>REST service</li><li>In progress</li></ul>
+          <!-- <a href="REPO_URL" target="_blank" rel="noopener">Repository</a> -->
+        </article>
+
+        <article class="project">
+          <span class="kicker">Real-time vision</span>
+          <h3>Smart Mirror Wellness Assistant</h3>
+          <p>A webcam dashboard that reads emotion, drowsiness and stress (from estimated heart rate) using MediaPipe Face Mesh with CNN and MLP heads. About 93% drowsiness accuracy, 2.3 BPM mean absolute error.</p>
+          <ul class="tags"><li>Python</li><li>MediaPipe</li><li>OpenCV</li></ul>
+        </article>
+
+        <article class="project">
+          <span class="kicker">Detection and tracking</span>
+          <h3>Con-Op Compliance Verification</h3>
+          <p>A custom tracker on top of RT-DETR that follows people and objects in real time and checks safety compliance from the relationships between them.</p>
+          <ul class="tags"><li>Python</li><li>RT-DETR</li></ul>
+        </article>
+
+        <article class="project">
+          <span class="kicker">Robotics</span>
+          <h3>MPC-Driven Motion Planning</h3>
+          <p>Implemented and compared linear time-varying MPC, artificial potential fields and reactive avoidance for safe robot trajectories around obstacles.</p>
+          <ul class="tags"><li>MATLAB</li><li>Control</li></ul>
+        </article>
+
+        <article class="project">
+          <span class="kicker">Geometry</span>
+          <h3>Dense Stereo Reconstruction</h3>
+          <p>Disparity maps from dynamic programming and cross-correlation matching, under 5% pixel error on four benchmark stereo pairs.</p>
+          <ul class="tags"><li>Python</li><li>OpenCV</li></ul>
+        </article>
+
+        <article class="project">
+          <span class="kicker">Geometry</span>
+          <h3>Panoramic Stitching</h3>
+          <p>Feature matching with RANSAC homography estimation to stitch overlapping photos into a single panorama.</p>
+          <ul class="tags"><li>Python</li><li>OpenCV</li></ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <p class="eyebrow">Education and honors</p>
+      <div class="two">
+        <div class="edu">
+          <div>
+            <h3>Columbia University</h3>
+            <p>M.S. in Computer Science · expected Dec 2026</p>
+            <p>Computer Vision II, Computational Imaging, Deep Learning for Computer Vision, NLP, Computational Aspects of Robotics</p>
+          </div>
+          <div>
+            <h3>Stony Brook University</h3>
+            <p>B.S. in Computer Science and Applied Mathematics &amp; Statistics · Cum Laude · Dec 2024</p>
+          </div>
+        </div>
+        <div>
+          <ul class="plain-list">
+            <li>Design Automation Conference (DAC) Young Fellow, 2023</li>
+            <li>Far Beyond Scholarship, Stony Brook University</li>
+            <li>Dean's List, Stony Brook University</li>
+          </ul>
+          <p class="subhead">Outside the lab</p>
+          <ul class="plain-list">
+            <li>Stony Brook Ballroom Team, competed at Harvard and Tufts</li>
+            <li>Women in Computer Science (WiCS) and Stony Brook Computing Society</li>
+            <li>Admissions tour guide and Undergraduate Student Government senate committee member</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Progga Paromita Dutta · New York</span>
+      <span>Updated October 2026</span>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  /* ---------- copy email ---------- */
+  var btn = document.getElementById('copy-email');
+  var emailEl = document.getElementById('email');
+  btn.addEventListener('click', function () {
+    var text = emailEl.textContent.trim();
+    function selectIt() {
+      var r = document.createRange(); r.selectNodeContents(emailEl);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selected';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; }, selectIt);
+    } catch (e) { selectIt(); }
+    setTimeout(function () { btn.textContent = 'Copy'; }, 1800);
+  });
+
+  /* ---------- section index highlight ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.index a'));
+  if ('IntersectionObserver' in window && links.length) {
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove('on'); });
+          var a = map[en.target.id]; if (a) a.classList.add('on');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+  }
+
+  /* ---------- hero figure: weak label in, patch anomaly map out ---------- */
+  var cv = document.getElementById('fig');
+  var ctx = cv.getContext('2d');
+  var W = cv.width, H = cv.height, N = 16, cell = W / N;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // deterministic noise so the figure looks the same every load
+  var seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  var jitter = []; for (var i = 0; i < N * N; i++) jitter.push(rnd());
+
+  // viridis stops
+  var VIR = [[68,1,84],[59,82,139],[33,145,140],[94,201,98],[253,231,37]];
+  function viridis(t) {
+    t = Math.max(0, Math.min(1, t)) * (VIR.length - 1);
+    var i = Math.floor(t), f = t - i, a = VIR[i], b = VIR[Math.min(i + 1, VIR.length - 1)];
+    return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f];
+  }
+  function tok(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  var cx = W * 0.5, cy = H * 0.53, R = W * 0.34;         // specimen
+  var dx = W * 0.63, dy = H * 0.40, dr = W * 0.075;      // defect
+
+  function drawSpecimen() {
+    var hex = tok('--surface').replace('#', '');
+    var dark = hex.length === 6 && (parseInt(hex.slice(0, 2), 16) + parseInt(hex.slice(2, 4), 16) + parseInt(hex.slice(4, 6), 16)) < 300;
+    ctx.fillStyle = tok('--surface'); ctx.fillRect(0, 0, W, H);
+    // soft specimen body
+    var g = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.4, R * 0.1, cx, cy, R);
+    g.addColorStop(0, dark ? '#5d6a73' : '#cfd6db');
+    g.addColorStop(1, dark ? '#2c353c' : '#8f9aa3');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.ellipse(cx, cy, R, R * 0.94, 0, 0, Math.PI * 2); ctx.fill();
+    // stem dimple
+    ctx.strokeStyle = dark ? '#1c2328' : '#6b757d'; ctx.lineWidth = 4; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(cx, cy - R * 0.9); ctx.quadraticCurveTo(cx + 8, cy - R * 1.08, cx + 18, cy - R * 1.16); ctx.stroke();
+    // defect (bruise)
+    var d = ctx.createRadialGradient(dx, dy, 2, dx, dy, dr);
+    d.addColorStop(0, dark ? 'rgba(10,12,14,0.85)' : 'rgba(55,60,64,0.8)');
+    d.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = d; ctx.beginPath(); ctx.ellipse(dx, dy, dr * 1.15, dr * 0.85, 0.5, 0, Math.PI * 2); ctx.fill();
+    // patch grid
+    ctx.strokeStyle = tok('--rule'); ctx.lineWidth = 1;
+    for (var k = 1; k < N; k++) {
+      ctx.beginPath(); ctx.moveTo(k * cell, 0); ctx.lineTo(k * cell, H); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, k * cell); ctx.lineTo(W, k * cell); ctx.stroke();
+    }
+  }
+
+  function score(i, j) {
+    var px = (i + 0.5) * cell, py = (j + 0.5) * cell;
+    var inBody = ((px - cx) * (px - cx)) / (R * R) + ((py - cy) * (py - cy)) / (R * R * 0.88) <= 1;
+    if (!inBody) return -1;
+    var dist = Math.hypot(px - dx, py - dy) / (dr * 1.9);
+    var s = Math.exp(-dist * dist * 1.6) + jitter[j * N + i] * 0.1;
+    return Math.min(1, s);
+  }
+
+  function drawMap(p) {
+    for (var j = 0; j < N; j++) {
+      for (var i = 0; i < N; i++) {
+        var s = score(i, j); if (s < 0) continue;
+        // patches reveal in order of their score, highest first
+        var local = Math.max(0, Math.min(1, (p * 1.6) - (1 - s) * 0.6));
+        if (local <= 0) continue;
+        var c = viridis(s);
+        ctx.fillStyle = 'rgba(' + c[0].toFixed(0) + ',' + c[1].toFixed(0) + ',' + c[2].toFixed(0) + ',' + (local * (0.22 + s * 0.6)).toFixed(3) + ')';
+        ctx.fillRect(i * cell + 1, j * cell + 1, cell - 2, cell - 2);
+      }
+    }
+    // label tag
+    ctx.font = '500 15px "JetBrains Mono", ui-monospace, monospace';
+    ctx.fillStyle = tok('--ink');
+    ctx.fillText('y = 1', 14, 26);
+    ctx.fillStyle = tok('--muted');
+    ctx.fillText(p >= 1 ? 'peak patch: (' + peak[0] + ', ' + peak[1] + ')' : 'localizing…', 14, H - 16);
+  }
+  var peak = (function () {
+    var best = -1, at = [0, 0];
+    for (var j = 0; j < N; j++) for (var i = 0; i < N; i++) { var s = score(i, j); if (s > best) { best = s; at = [i, j]; } }
+    return at;
+  })();
+
+  var start = null, raf = null;
+  function frame(t) {
+    if (start === null) start = t;
+    var p = Math.min(1, (t - start) / 1700);
+    drawSpecimen(); drawMap(p);
+    if (p < 1) raf = requestAnimationFrame(frame);
+  }
+  function play() {
+    if (raf) cancelAnimationFrame(raf);
+    if (reduce) { drawSpecimen(); drawMap(1); return; }
+    start = null; raf = requestAnimationFrame(frame);
+  }
+  // resting state first, then animate from it
+  drawSpecimen(); drawMap(1);
+  if (!reduce) setTimeout(play, 350);
+  cv.addEventListener('click', play);
+
+  // redraw when theme changes
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  var redraw = function () { drawSpecimen(); drawMap(1); };
+  if (mq.addEventListener) mq.addEventListener('change', redraw);
+  new MutationObserver(redraw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+})();
+</script>
+
+</body>
+</html>
